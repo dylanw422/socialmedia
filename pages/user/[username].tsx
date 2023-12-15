@@ -261,7 +261,7 @@ const repost = async (username: string, postId: string) => {
             <h1 className='flex items-center text-white text-2xl font-sf-pro'>{userData?.name}{userData?.following.includes(thisUser?.username) ? <span className='text-xs text-neutral-300 bg-neutral-900 pt-1 pb-1 pl-2 pr-2 rounded-full ml-2'>Follows You</span> : ''}</h1>
             <h1 className='text-gray-500 font-medium text-sm'>@{userData?.username}</h1>
           </div>
-          <div id='followers-following' className='items-center flex flex-row'>"
+          <div id='followers-following' className='items-center flex flex-row'>
             <div>
               <button className='bg-black text-white border border-neutral-700 text-sm pt-2 pb-2 pl-4 pr-4 m-3 rounded-sm' onClick={() => updateFollowers(userData.username)}>{thisUser?.following.includes(userData?.username) ? 'Unfollow' : 'Follow'}</button>
             </div>

@@ -204,7 +204,7 @@ export default function Mentions() {
                         </CommandDialog>
                     </div>
                     {userData?.mentions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((mention) => (
-                        <div className='flex flex-col items-center'>
+                        <div className='flex flex-col items-center' key={userData.mentions.indexOf(mention)}>
                             <div className='flex flex-col justify-center border-b border-neutral-700 w-11/12 p-5 pt-10 pb-10'>
                                 <div className='flex flex-row justify-between'>
                                     <div>
