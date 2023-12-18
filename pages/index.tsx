@@ -41,7 +41,7 @@ export default function Home() {
 
   useEffect(() => {
     if (user) {
-      router.push('/feed');
+      //router.push('/feed');
     }
   }, [user, router]);
 

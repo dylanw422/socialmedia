@@ -369,7 +369,7 @@ export default function Feed() {
                         </Link>
                     </div>
                 </div>
-                <div id='feed' className='border-r border-solid border-neutral-700 w-2/4 h-screen overflow-scroll'>
+                <div id='feed' className='border-r border-solid border-neutral-700 w-2/4 h-screen overflow-y-scroll' style={{scrollbarWidth: 'none'}}>
                     <div id='search' className='flex justify-center items-center h-20 border-b border-solid border-neutral-700'>
                       <div className='w-11/12 flex justify-start p-5'>
                         <button className='flex justify-start' onClick={() => setOpen(true)}>
@@ -425,7 +425,6 @@ export default function Feed() {
                                   } else {
                                     post('')
                                     setContent('')
-                                    console.error('No username mentioned.');
                                   }
                                 }
                               }}

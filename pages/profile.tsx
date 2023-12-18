@@ -30,6 +30,7 @@ interface Post {
   
   export default function Profile(): JSX.Element {
     const [posts, setPosts] = useState<Post[]>([]);
+    const [allPosts, setAllPosts] = useState<Post[]>([])
     const [userData, setUserData] = useState<User | undefined>();
     const [user] = useAuthState(auth);
     const [displayNameUpdate, setDisplayNameUpdate] = useState('')
@@ -72,9 +73,24 @@ interface Post {
       }
     }
   
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch('/api/getAllPosts');
+        if (!res.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+  
+        const data: Post[] = await res.json();
+        setAllPosts(data.reverse())
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     useEffect(() => {
       fetchUser();
       fetchAllUsers();
+      fetchPosts()
     }, [user]);
 
     const fetchUsersPosts = async () => {
@@ -528,9 +544,9 @@ interface Post {
                                     </div>
                                 </div>
                                 <div className={post.repostId ? 'text-white pt-3 pb-3 tracking-wide w-4/5 flex justify-center mx-auto' : 'text-white pt-3 pb-3 tracking-wide w-4/5'}>
-                                  {post.repostId ? (
+                                {post.repostId ? (
                                       // Render the content of the original post if there is a repostId
-                                      posts
+                                      allPosts
                                           .filter(originalPost => originalPost.id === post.repostId)
                                           .map((originalPost) =>
                                           <div key={originalPost.id} className={`flex flex-col justify-center border rounded-md border-neutral-700 w-11/12 p-5 ${originalPost.content.includes(`@${userData?.username}`) ? 'bg-[#140c00] border-l-4 border-l-yellow-400' : ''}`}>

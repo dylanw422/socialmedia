@@ -38,7 +38,20 @@ export const editProfile = async (username: string, newUsername: string, newName
             }
         })
 
-        return { editedProfile, editedAuthorusername, updateInFollowersArrays }
+        const updateInFollowingArrays = await prisma.users.updateMany({
+            where: {
+                following: {
+                    has: username
+                }
+            },
+            data: {
+                following: {
+                    set: [newUsername]
+                }
+            }
+        })
+
+        return { editedProfile, editedAuthorusername, updateInFollowersArrays, updateInFollowingArrays }
     } catch (err) {
         console.error(err)
         throw err

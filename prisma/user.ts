@@ -8,7 +8,7 @@ export const createUser = async (email, name, username) => {
                 name,
                 username,
                 followers: [username],
-                following: []
+                following: [username]
             }
         })
         return user
